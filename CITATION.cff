@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the WebTrap paper."
+title: "WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation"
+authors:
+  - family-names: Liu
+    given-names: Zhichao
+  - family-names: Pan
+    given-names: Wenbo
+  - family-names: Yu
+    given-names: Haining
+  - family-names: Gao
+    given-names: Ge
+  - family-names: Zhu
+    given-names: Tianqing
+  - family-names: Jia
+    given-names: Xiaohua
+date-released: "2026-05-08"
+license: MIT
+preferred-citation:
+  type: unpublished
+  title: "WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation"
+  authors:
+    - family-names: Liu
+      given-names: Zhichao
+    - family-names: Pan
+      given-names: Wenbo
+    - family-names: Yu
+      given-names: Haining
+    - family-names: Gao
+      given-names: Ge
+    - family-names: Zhu
+      given-names: Tianqing
+    - family-names: Jia
+      given-names: Xiaohua
+  year: 2026

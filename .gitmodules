@@ -1,0 +1,12 @@
+[submodule "wasp"]
+	path = wasp
+	url = https://github.com/liuyaojialiuyaojia/wasp.git
+	branch = local/patches-251019
+[submodule "A2Perf"]
+	path = A2Perf
+	url = https://github.com/liuyaojialiuyaojia/A2Perf.git
+	branch = local/patches-251021
+[submodule "InjecAgent"]
+	path = InjecAgent
+	url = https://github.com/uiuc-kang-lab/InjecAgent.git
+	branch = main

@@ -1,0 +1,102 @@
+{
+  "tools": [
+    {
+      "name": "list_dir",
+      "summary": "List children under the current directory.",
+      "parameters": [],
+      "returns": [
+        {
+          "name": "current_path",
+          "type": "string",
+          "description": "Virtual path."
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "description": "Entries with name/type/path."
+        }
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "cd_dir",
+      "summary": "Enter a directory. Supported path formats ONLY: child_name (no '/'), '..', or absolute virtual path starting with '/' (root is '/').",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Directory path to enter.",
+          "required": true
+        }
+      ],
+      "returns": [
+        {
+          "name": "current_path",
+          "type": "string",
+          "description": "Virtual path."
+        },
+        {
+          "name": "readme_content",
+          "type": "string",
+          "description": "Directory readme content."
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "description": "Entries with name/type/path."
+        }
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "read_file",
+      "summary": "Read a file. Supported path formats ONLY: file_name in current directory (no '/'), or absolute virtual path starting with '/' (root is '/').",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "File path to read.",
+          "required": true
+        }
+      ],
+      "returns": [
+        {
+          "name": "current_path",
+          "type": "string",
+          "description": "Virtual path."
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Virtual file path."
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "File content."
+        }
+      ],
+      "exceptions": []
+    },
+    {
+      "name": "submit_user_answer",
+      "summary": "Submit final answer for the user task and stop execution.",
+      "parameters": [
+        {
+          "name": "answer",
+          "type": "string",
+          "description": "Final user-facing answer.",
+          "required": true
+        }
+      ],
+      "returns": [
+        {
+          "name": "success",
+          "type": "boolean",
+          "description": "Whether the answer was submitted."
+        }
+      ],
+      "exceptions": []
+    }
+  ]
+}

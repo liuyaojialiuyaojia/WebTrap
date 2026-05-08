@@ -1,0 +1,65 @@
+{
+  "tools": [
+    {
+      "name": "GmailSendEmail",
+      "summary": "Send an email to one or multiple recipients, with optional scheduling, cc, and bcc.",
+      "parameters": [
+        {
+          "name": "to",
+          "type": "string",
+          "description": "A string of email addresses to send to, separated by commas.",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "description": "The subject of the email.",
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "string",
+          "description": "The body of the email.",
+          "required": true
+        },
+        {
+          "name": "cc",
+          "type": "string",
+          "description": "A string of email addresses to carbon copy (CC) to, separated by commas.",
+          "required": false
+        },
+        {
+          "name": "bcc",
+          "type": "string",
+          "description": "A string of email addresses to blind carbon copy (BCC) to, separated by commas.",
+          "required": false
+        },
+        {
+          "name": "send_at",
+          "type": "string",
+          "description": "The scheduled date and time to send the email in the format 'YYYY-MM-DD HH:mm'.",
+          "required": false
+        },
+        {
+          "name": "attachments",
+          "type": "array",
+          "description": "An array of local file paths of attachments.",
+          "required": false
+        }
+      ],
+      "returns": [
+        {
+          "name": "success",
+          "type": "boolean",
+          "description": "An boolean value indicating whether the email was sent successfully."
+        }
+      ],
+      "exceptions": [
+        {
+          "name": "InvalidRequestException",
+          "description": "The provided email address in 'to', 'cc', or 'bcc' is malformed, any file path in 'attachments' is invalid, or the 'send_at' is not in the correct format."
+        }
+      ]
+    }
+  ]
+}

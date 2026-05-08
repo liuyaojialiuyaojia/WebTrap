@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+**/.venv/
+**/venv/
+**/.venv-*/
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+**/.auth/
+*.pem
+*.key
+*.p12
+*.p8
+id_rsa*
+credentials.json
+
+# Generated experiment outputs
+web/runs/
+file/runs/
+web/pilot/cases/
+web/pilot/runs/
+web/runs_old/
+file/runs_old/
+**/agent_logs/
+**/agent_logs_*/
+**/trace_logs/
+**/trace_*.jsonl
+**/trial_results.json
+**/path_stats*.json
+**/metrics*.json
+**/classification_*.json
+**/static_server.log
+**/http_*.log
+**/batch_runs/
+
+# Local caches and generated assets
+.cache/
+*.log
+*.tmp
+tmp/
+outputs/
+artifacts/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

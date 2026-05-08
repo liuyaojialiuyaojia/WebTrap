@@ -1,0 +1,30 @@
+"""Shared defense mode constants for web and file experiments."""
+
+from __future__ import annotations
+
+DEFENSE_MODE_DEFAULT = "default_attack"
+DEFENSE_MODE_SYSTEM = "system_prompt_defense"
+DEFENSE_MODE_STEP_WISE = "step_wise_prompt_defense"
+DEFENSE_MODE_GOAL_REINFORCE_IGNORE = "goal_reinforce_ignore"
+DEFENSE_MODE_GOAL_REINFORCE_FAKECOM_T = "goal_reinforce_fakecom_t"
+DEFENSE_MODE_SEGMENT_REMOVE_GATED = "segment_remove_gated"
+DEFENSE_MODE_SEGMENT_REMOVE_DIRECT = "segment_remove_direct"
+
+GOAL_REINFORCEMENT_MODES = (
+    DEFENSE_MODE_GOAL_REINFORCE_IGNORE,
+    DEFENSE_MODE_GOAL_REINFORCE_FAKECOM_T,
+)
+
+SEGMENTATION_REMOVAL_MODES = (
+    DEFENSE_MODE_SEGMENT_REMOVE_GATED,
+    DEFENSE_MODE_SEGMENT_REMOVE_DIRECT,
+)
+
+ALLOWED_DEFENSE_MODES = (
+    DEFENSE_MODE_DEFAULT,
+    DEFENSE_MODE_SYSTEM,
+    DEFENSE_MODE_STEP_WISE,
+    *GOAL_REINFORCEMENT_MODES,
+    *SEGMENTATION_REMOVAL_MODES,
+)
+

@@ -1,0 +1,15 @@
+{
+  "kind": "seed_tree",
+  "depth": 10,
+  "width": 2,
+  "base_seed": 42,
+  "model": "deepseek-v3-1-terminus",
+  "max_tokens": 2048,
+  "temperature": 0.6,
+  "top_p": null,
+  "num_pages": 1023,
+  "output_root": "web/exp/02_nested_builder/tree/d10_w2_s42",
+  "generated_at": "2026-02-27T16:16:26Z",
+  "script": "build_tree_design.py",
+  "tree_id": "d10_w2_s42"
+}
