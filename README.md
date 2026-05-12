@@ -2,9 +2,11 @@
 
 # 🕸️ WebTrap
 
-**Stealthy Mid-Task Hijacking of Browser Agents During Navigation**
+**[Stealthy Mid-Task Hijacking of Browser Agents During Navigation](https://arxiv.org/abs/2605.08310)**
 
 [TL;DR](#tldr) • [Overview](#overview) • [Code Map](#code-map) • [Setup](#setup) • [Run Experiments](#run-experiments) • [Citation](#citation)
+
+[[Paper](https://arxiv.org/abs/2605.08310)] [[PDF](https://arxiv.org/pdf/2605.08310)]
 
 ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
@@ -37,7 +39,7 @@ This repository contains the experiment code used to construct tasks, inject Web
 <a id="overview"></a>
 ## 🔍 Overview
 
-This repository provides the experiment code for **WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation**.
+This repository provides the experiment code for **[WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation](https://arxiv.org/abs/2605.08310)**.
 
 WebTrap is a prompt-injection attack for long-horizon browser agents. In this work, browser tasks include both webpage navigation and file-system navigation. WebTrap uses **multi-step instruction fusion steering** and **context-grounded enhancement** to make an agent execute the attacker goal and then resume the original user task, preserving user-task utility while increasing attack success.
 
@@ -64,7 +66,7 @@ Core folders:
 | [`web/`](./web/) | Web-browser experiments, including WebTrap injection, baseline attacks, task construction, agent execution, and evaluation. |
 | [`file/`](./file/) | File-browser experiments, including released file-tree data, attack construction, execution, and evaluation. |
 | [`utils/`](./utils/) | Shared experiment utilities, model client wrapper, and defense baselines. |
-| [`materials/`](./materials/) | Paper PDF and README figures. |
+| [`materials/`](./materials/) | README figures. |
 
 Referenced submodules:
 
@@ -147,14 +149,16 @@ If you use this code, please cite the WebTrap paper. GitHub can also read the re
 
 ```bibtex
 @misc{liu2026webtrap,
-  title  = {WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation},
-  author = {Liu, Zhichao and Pan, Wenbo and Yu, Haining and Gao, Ge and Zhu, Tianqing and Jia, Xiaohua},
-  year   = {2026},
-  note   = {Preprint}
+  title         = {WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation},
+  author        = {Liu, Zhichao and Pan, Wenbo and Yu, Haining and Gao, Ge and Zhu, Tianqing and Jia, Xiaohua},
+  year          = {2026},
+  eprint        = {2605.08310},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  doi           = {10.48550/arXiv.2605.08310},
+  url           = {https://arxiv.org/abs/2605.08310}
 }
 ```
-
-The BibTeX entry will be updated with the final arXiv or proceedings metadata once available.
 
 <a id="license"></a>
 ## 📄 License

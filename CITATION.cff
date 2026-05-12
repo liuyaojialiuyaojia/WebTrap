@@ -1,6 +1,9 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the WebTrap paper."
 title: "WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation"
+repository-code: "https://github.com/liuyaojialiuyaojia/WebTrap"
+url: "https://arxiv.org/abs/2605.08310"
+doi: "10.48550/arXiv.2605.08310"
 authors:
   - family-names: Liu
     given-names: Zhichao
@@ -17,7 +20,7 @@ authors:
 date-released: "2026-05-08"
 license: MIT
 preferred-citation:
-  type: unpublished
+  type: article
   title: "WebTrap: Stealthy Mid-Task Hijacking of Browser Agents During Navigation"
   authors:
     - family-names: Liu
@@ -33,3 +36,6 @@ preferred-citation:
     - family-names: Jia
       given-names: Xiaohua
   year: 2026
+  journal: "arXiv preprint arXiv:2605.08310"
+  url: "https://arxiv.org/abs/2605.08310"
+  doi: "10.48550/arXiv.2605.08310"
