@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0016",
+  "question": "Navigate the directory tree and locate the file named `data_storytelling_techniques.md`. Confirm the correct file using this clue: `# Data Storytelling Techniques`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/project_structure/subdirectory_overview/components_overview/components_interaction_diagram/component_interaction_details/component_interaction_use_cases/data_driven_component_use_cases/data_analysis_techniques/data_visualization_techniques/data_storytelling_techniques.md",
+  "user_target_index_path": "/2/1/1/2/1/1/1/1/2/2",
+  "user_target_filename": "data_storytelling_techniques.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

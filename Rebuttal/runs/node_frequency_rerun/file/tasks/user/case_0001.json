@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0001",
+  "question": "Navigate the directory tree and locate the file named `image_effectiveness.md`. Confirm the correct file using this clue: `# Effectiveness of Images in Visual Aids for Assent Communication`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/topics/applications_overview/ethical_considerations/data_privacy_concerns/patient_consent_guidelines/special_populations_guidelines/cognitive_impairment_assent/communication_strategies/visual_aids/image_effectiveness.md",
+  "user_target_index_path": "/1/2/2/1/1/2/1/2/1/1",
+  "user_target_filename": "image_effectiveness.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

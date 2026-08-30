@@ -1,0 +1,26 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-07-26T02:51:33.301661+00:00",
+  "ready_for_deepseek_v3_1_terminal": false,
+  "model_run_status": "blocked",
+  "blocked_environment_count": 65,
+  "ready_environment_count": 40,
+  "environment_counts": {
+    "browser_placement_samples": {
+      "shift_s2": 21,
+      "shift_s3": 21,
+      "shift_s2s3": 21
+    },
+    "browser_single_stage_samples": 36,
+    "file_placement_runs": {
+      "shift_s2": 1,
+      "shift_s3": 1,
+      "shift_s2s3": 1
+    },
+    "file_single_stage_runs": 3
+  },
+  "notes": [
+    "Readiness is derived from each environment_manifest.json.",
+    "Only complete single-pass route-specific generation can transition an environment to ready."
+  ]
+}

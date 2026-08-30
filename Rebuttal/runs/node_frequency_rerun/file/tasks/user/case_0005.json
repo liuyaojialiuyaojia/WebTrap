@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0005",
+  "question": "Navigate the directory tree and locate the file named `color_palette_selection.md`. Confirm the correct file using this clue: `# Selecting Color Palettes for Telehealth UI`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/topics/applications_overview/real_world_cases/telemedicine_case_study/telemedicine_accessibility/training_resources/telehealth_accessibility_guidelines/telehealth_accessibility_best_practices/ui_design_considerations/color_palette_selection.md",
+  "user_target_index_path": "/1/2/1/1/2/2/2/2/1/2",
+  "user_target_filename": "color_palette_selection.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Information Retrieval Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="assets/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/jquery-ui.min.css">
+  <link rel="stylesheet" href="assets/env-design.css">
+  <style>
+    body { margin: 1.5rem; }
+    #area { min-height: 640px; }
+    .trap-banner { margin-bottom: 1rem; }
+    .trap-leaf-marker { font-weight: bold; color: #b84a00; }
+    .trap-link-container {
+      margin: 1rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 50;
+    }
+    .trap-link-container button {
+      white-space: normal;
+    }
+    .trap-site-link {
+      position: relative;
+      z-index: 51;
+    }
+    #click-canvas,
+    #attention-canvas {
+      pointer-events: none !important;
+    }
+    /* Disable MiniWoB start/sync overlays so automation clicks reach buttons */
+    #sync-task-cover, #sync-start-cover, #cover-start, .facecover, .sync-task-cover {
+      display: none !important;
+      pointer-events: none !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>Information Retrieval Website</h1>
+  <p id="status">Loading design…</p>
+  <div id="wrap">
+    <div id="query"></div>
+    <div id="area"></div>
+  </div>
+  <script src="assets/jquery.js"></script>
+  <script src="assets/jquery-ui.min.js"></script>
+  <script src="assets/bootstrap.min.js"></script>
+  <script src="assets/d3.v3.min.js"></script>
+  <script src="assets/core.js"></script>
+  <script src="assets/ui_utils.js"></script>
+  <script src="assets/env-design.js"></script>
+  <script>
+    // Ensure env-design.js optional conceptual flag exists to avoid ReferenceError
+    // Some builds of env-design.js check a global USE_CONCEPTUAL variable.
+    // Default to false for our static trap-site.
+    var USE_CONCEPTUAL = false;
+    // MiniWob core expects a global genProblem() to exist when clicking START.
+    // Our static viewer doesn't use it, so provide a safe no-op to allow
+    // the START overlay to dismiss on click.
+    window.genProblem = window.genProblem || function () {};
+    const NODE_ACTIONS_URL = 'node_actions.json';
+    const EDGE_ACTIONS_URL = 'edge_actions.json';
+    const METADATA_URL = 'page_metadata.json';
+
+    let trapNavigationTargets = new Map();
+    let trapFallbackInstalled = false;
+
+    
+
+    // Simple global cooldown to avoid multiple navigations per user gesture
+    if (!window.__trapNavCooldownUntil) { window.__trapNavCooldownUntil = 0; }
+    function tryOpenPageOnce(index, cause) {
+      var now = Date.now();
+      if (now < window.__trapNavCooldownUntil) { return; }
+      window.__trapNavCooldownUntil = now + 200; // 200ms guard per gesture
+      openPageSafe(index, cause);
+    }
+
+    function openPageSafe(index, cause) {
+      if (!Number.isFinite(Number(index))) {
+        return;
+      }
+      try {
+        disableCovers();
+      } catch (err) {
+        console.warn('disableCovers failed', err);
+      }
+      
+      try {
+        if (typeof window.openPage === 'function') {
+          window.openPage(Number(index));
+        }
+      } catch (err) {
+        console.error('openPage invocation failed:', err);
+      }
+      document.querySelectorAll('[id^="page"]').forEach(el => {
+        el.style.display = 'none';
+      });
+      const targetPage = document.getElementById('page' + Number(index));
+      if (targetPage) {
+        targetPage.style.display = 'block';
+        if (typeof targetPage.scrollIntoView === 'function') {
+          try {
+            targetPage.scrollIntoView({ block: 'start' });
+          } catch (err) {
+            console.warn('scrollIntoView failed', err);
+          }
+        }
+      }
+      try {
+        window.location.hash = 'p' + Number(index);
+      } catch (err) {
+        console.warn('hash update failed', err);
+      }
+      const status = document.getElementById('status');
+      if (status) {
+        status.textContent = 'Information navigation → page ' + Number(index) + ' · (' + cause + ')';
+      }
+    }
+    window.openPageSafe = openPageSafe;
+
+    function renderPage(metadata) {
+      metadata.pages.forEach(page => {
+        const pageRoot = document.getElementById(`page${page.page_index}`);
+        if (!pageRoot) return;
+        const mainform = pageRoot.querySelector('#mainform') || pageRoot;
+
+        let content = mainform.querySelector('.trap-page-content');
+        if (!content) {
+          content = document.createElement('div');
+          content.className = 'trap-page-content';
+          mainform.appendChild(content);
+        }
+        content.innerHTML = '';
+        if (mainform.firstChild !== content) {
+          mainform.insertBefore(content, mainform.firstChild);
+        }
+
+        const actions = Array.isArray(page.action) ? page.action : [];
+        const actionConcepts = actions.map(entry => {
+          if (!entry) return '';
+          if (typeof entry === 'string') return entry;
+          if (typeof entry === 'object') return entry.concept || entry.name || '';
+          return '';
+        });
+        const hasHeaderPrimitive = actionConcepts.some(name => name === 'header');
+
+        if (!hasHeaderPrimitive && page.title) {
+          const titleEl = document.createElement('h2');
+          titleEl.className = 'trap-page-title';
+          titleEl.textContent = page.title;
+          content.appendChild(titleEl);
+        }
+
+        const bodyEl = document.createElement('p');
+        bodyEl.className = 'trap-page-body';
+        bodyEl.textContent = page.body;
+        content.appendChild(bodyEl);
+
+        // Render leaf marker if present
+        if (page.leaf_marker && typeof page.leaf_marker === 'string' && page.leaf_marker.trim()) {
+          const lm = document.createElement('p');
+          lm.className = 'trap-leaf-marker';
+          lm.id = 'leaf-marker-p' + page.page_index;
+          lm.setAttribute('aria-label', 'Leaf marker');
+          lm.textContent = page.leaf_marker;
+          content.appendChild(lm);
+        }
+
+        mainform.querySelectorAll('.trap-link-container').forEach(el => el.remove());
+
+        if (Array.isArray(page.click_targets) && page.click_targets.length > 0) {
+          const container = document.createElement('div');
+          container.className = 'trap-link-container';
+          container.addEventListener('click', (ev) => {
+            const btn = ev.target && ev.target.closest ? ev.target.closest('.trap-site-link') : null;
+            if (!btn) return;
+            ev.preventDefault();
+            ev.stopPropagation();
+            const idx = Number(btn.dataset.targetPage);
+            if (Number.isFinite(idx)) { tryOpenPageOnce(idx, 'delegated:container'); }
+          }, true);
+          page.click_targets.forEach(target => {
+            const button = document.createElement('button');
+            button.id = target.element_id;
+            button.className = 'trap-site-link btn btn-primary btn-sm';
+            button.type = 'button';
+            button.textContent = target.label;
+            button.title = target.blurb;
+            button.setAttribute('role', 'button');
+            button.setAttribute('tabindex', '0');
+            if (target.label) {
+              button.setAttribute('aria-label', target.label);
+            }
+            if (typeof target.target_page === 'number') {
+              button.dataset.targetPage = String(target.target_page);
+            }
+            button.addEventListener('click', ev => {
+              ev.preventDefault();
+              ev.stopPropagation();
+              const idx = Number(ev.currentTarget.dataset.targetPage);
+            if (Number.isFinite(idx)) { tryOpenPageOnce(idx, 'direct:button'); }
+          }, true);
+            button.addEventListener('keydown', ev => {
+              if (ev.key === 'Enter' || ev.key === ' ') {
+                ev.preventDefault();
+                ev.stopPropagation();
+                const idx = Number(ev.currentTarget.dataset.targetPage);
+                if (Number.isFinite(idx)) { tryOpenPageOnce(idx, 'kbd:' + ev.key.toLowerCase()); }
+              }
+            }, true);
+            container.appendChild(button);
+          });
+          mainform.appendChild(container);
+        }
+      });
+    }
+
+    function disableCovers() {
+      let hiddenCount = 0;
+      ['sync-task-cover', 'sync-start-cover', 'cover-start'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.style.display = 'none';
+          el.style.pointerEvents = 'none';
+          el.setAttribute('aria-hidden', 'true');
+          hiddenCount += 1;
+        }
+      });
+      const coverNodes = document.querySelectorAll('.facecover, .sync-task-cover');
+      coverNodes.forEach(el => {
+        el.style.display = 'none';
+        el.style.pointerEvents = 'none';
+        el.setAttribute('aria-hidden', 'true');
+        hiddenCount += 1;
+      });
+      
+    }
+
+    function attachTrapFallbackHandlers(metadata) {
+      if (!metadata || !Array.isArray(metadata.pages)) {
+        return;
+      }
+      disableCovers();
+      trapNavigationTargets = new Map();
+      metadata.pages.forEach(page => {
+        (page.click_targets || []).forEach(target => {
+          if (target && target.element_id && typeof target.target_page === 'number') {
+            trapNavigationTargets.set(target.element_id, target.target_page);
+          }
+        });
+      });
+      if (trapNavigationTargets.size === 0) { return; }
+
+      if (!trapFallbackInstalled) {
+        // Only one conservative fallback: pointerdown anywhere near a button,
+        // and only if the original target is NOT already a trap-site-link
+        const handler = (event) => {
+          if (!event || !event.target) return;
+          // If event already targets a real trap-site-link, let its own handler run
+          if (event.target.closest && event.target.closest('.trap-site-link')) return;
+          const isPointerEventSupported = typeof PointerEvent !== 'undefined';
+          if (!(isPointerEventSupported && event instanceof PointerEvent)) return;
+          let button = null;
+          const candidates = Array.from(document.querySelectorAll('.trap-site-link'));
+          for (const candidate of candidates) {
+            const cr = candidate.getBoundingClientRect();
+            if (
+              event.clientX >= cr.left && event.clientX <= cr.right &&
+              event.clientY >= cr.top && event.clientY <= cr.bottom
+            ) { button = candidate; break; }
+          }
+          if (!button) return;
+          const mapped = trapNavigationTargets.get(button.id);
+          const datasetIdx = Number(button.dataset.targetPage);
+          const targetPageIndex = typeof mapped === 'number' ? mapped : datasetIdx;
+          if (!Number.isFinite(targetPageIndex)) return;
+          event.stopPropagation();
+          tryOpenPageOnce(targetPageIndex, 'fallback:pointerdown');
+        };
+        document.addEventListener('pointerdown', handler, true);
+        trapFallbackInstalled = true;
+      }
+    }
+
+    async function bootstrapSite() {
+      try {
+        const [nodeResp, edgeResp, metaResp] = await Promise.all([
+          fetch(NODE_ACTIONS_URL),
+          fetch(EDGE_ACTIONS_URL),
+          fetch(METADATA_URL),
+        ]);
+        const nodeActions = await nodeResp.json();
+        const edgeActions = await edgeResp.json();
+        const metadata = await metaResp.json();
+
+        core.startEpisode();
+        disableCovers();
+        const status = document.getElementById('status');
+        status.textContent = 'Design loaded';
+
+        addNodes(nodeActions);
+        nodeCreateFn();
+        renderPage(metadata);
+        addEdges(edgeActions);
+        edgeCreateFn();
+        disableCovers();
+        attachTrapFallbackHandlers(metadata);
+        // Keep navigation tree-only; do not call connectGraph so MiniWoB won't add implicit Next/Submit links.
+        // 确保导航仅依赖树形按钮，禁止 connectGraph 自动插入 Next/Submit 跳转。
+        document.querySelectorAll('[id^="page"]').forEach(el => { el.style.display = 'none'; });
+        const rootPage = document.getElementById('page0');
+        if (rootPage) {
+          rootPage.style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Failed to bootstrap site', err);
+        const status = document.getElementById('status');
+        status.textContent = 'Failed to load design: ' + err.message;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', bootstrapSite);
+  </script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+{
+  "generated_at": "2026-07-24T09:33:47.665774",
+  "args": {
+    "tasks": "Rebuttal/runs/node_frequency_rerun/browser/tasks",
+    "result_dir": "Rebuttal/runs/node_frequency_rerun/browser/logs",
+    "model": "deepseek-v3-1-terminus",
+    "dataset": "visualwebarena",
+    "defense_mode": "default_attack",
+    "max_actions": 20,
+    "max_observations": 20,
+    "trials": 1,
+    "resume": false,
+    "temperature": 1.0,
+    "seed": null,
+    "max_parallel": 8,
+    "sleep_between": 0.0
+  },
+  "tasks": [
+    {
+      "task_id": 3000,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3000.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3000.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3000.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3000.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3000.log",
+          "started_at": "2026-07-24T09:33:47.666751",
+          "finished_at": "2026-07-24T09:52:38.908437",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3001,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3001.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3001.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3001.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3001.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3001.log",
+          "started_at": "2026-07-24T09:33:47.667900",
+          "finished_at": "2026-07-24T09:52:06.637589",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3002,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3002.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3002.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3002.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3002.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3002.log",
+          "started_at": "2026-07-24T09:33:47.668887",
+          "finished_at": "2026-07-24T09:51:39.978200",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3003,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3003.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3003.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3003.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3003.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3003.log",
+          "started_at": "2026-07-24T09:33:47.669820",
+          "finished_at": "2026-07-24T09:44:34.147651",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3004,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3004.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3004.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3004.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3004.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3004.log",
+          "started_at": "2026-07-24T09:33:47.670778",
+          "finished_at": "2026-07-24T09:46:09.224104",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3005,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3005.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3005.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3005.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3005.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3005.log",
+          "started_at": "2026-07-24T09:33:47.671932",
+          "finished_at": "2026-07-24T09:49:33.737805",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3006,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3006.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3006.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3006.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3006.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3006.log",
+          "started_at": "2026-07-24T09:33:47.673049",
+          "finished_at": "2026-07-24T09:51:39.274817",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3007,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3007.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3007.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3007.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3007.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3007.log",
+          "started_at": "2026-07-24T09:33:47.674109",
+          "finished_at": "2026-07-24T09:53:26.713300",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3008,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3008.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3008.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3008.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3008.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3008.log",
+          "started_at": "2026-07-24T09:44:34.147977",
+          "finished_at": "2026-07-24T10:00:36.361532",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3009,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3009.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3009.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3009.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3009.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3009.log",
+          "started_at": "2026-07-24T09:46:09.224431",
+          "finished_at": "2026-07-24T10:03:26.780713",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3010,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3010.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3010.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3010.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3010.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3010.log",
+          "started_at": "2026-07-24T09:49:33.738106",
+          "finished_at": "2026-07-24T10:02:18.656633",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3011,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3011.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3011.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3011.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3011.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3011.log",
+          "started_at": "2026-07-24T09:51:39.275228",
+          "finished_at": "2026-07-24T09:58:13.287401",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3012,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3012.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3012.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3012.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3012.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3012.log",
+          "started_at": "2026-07-24T09:51:39.978538",
+          "finished_at": "2026-07-24T10:12:04.095658",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3013,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3013.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3013.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3013.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3013.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3013.log",
+          "started_at": "2026-07-24T09:52:06.637970",
+          "finished_at": "2026-07-24T10:12:51.979269",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3014,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3014.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3014.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3014.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3014.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3014.log",
+          "started_at": "2026-07-24T09:52:38.908841",
+          "finished_at": "2026-07-24T10:11:37.447847",
+          "returncode": 0
+        }
+      ]
+    },
+    {
+      "task_id": 3015,
+      "task_path": "Rebuttal/runs/node_frequency_rerun/browser/tasks/3015.json",
+      "trials": [
+        {
+          "trial": 1,
+          "log": "Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3015.jsonl",
+          "status": "completed",
+          "command": "python web/exp/osr/tool_calling_agent_uncached.py --webarena_config_path Rebuttal/runs/node_frequency_rerun/browser/tasks/3015.json --model deepseek-v3-1-terminus --temperature 1.0 --defense-mode default_attack --trace-log-filepath Rebuttal/runs/node_frequency_rerun/browser/logs/trace_3015.jsonl --max_actions 20 --max_observations_to_keep 20",
+          "worker_log": "Rebuttal/runs/node_frequency_rerun/browser/logs/worker_logs/task_3015.log",
+          "started_at": "2026-07-24T09:53:26.713700",
+          "finished_at": "2026-07-24T10:12:25.735646",
+          "returncode": 0
+        }
+      ]
+    }
+  ]
+}

@@ -16,7 +16,14 @@ assert SPEC is not None and SPEC.loader is not None
 inject_from_attack_case = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(inject_from_attack_case)
 
-from psaa.ablation import wo_inertia, wo_lure, wo_payload
+from psaa.ablation import (
+    inertia_only,
+    lure_only,
+    payload_only,
+    wo_inertia,
+    wo_lure,
+    wo_payload,
+)
 from psaa.ablation import prompt_spec as ablation_prompt_spec
 
 
@@ -29,6 +36,18 @@ def test_validate_ablation_variant_allows_component_drop_variants() -> None:
     assert (
         inject_from_attack_case._validate_ablation_variant("wo_payload")
         == "wo_payload"
+    )
+
+
+def test_validate_ablation_variant_allows_single_stage_variants() -> None:
+    assert inject_from_attack_case._validate_ablation_variant("lure_only") == "lure_only"
+    assert (
+        inject_from_attack_case._validate_ablation_variant("inertia_only")
+        == "inertia_only"
+    )
+    assert (
+        inject_from_attack_case._validate_ablation_variant("payload_only")
+        == "payload_only"
     )
 
 
@@ -60,3 +79,9 @@ def test_wo_payload_stage_plan_matches_component_drop() -> None:
     assert wo_payload.build_stage_plan(1) == [("inertia", 0)]
     assert wo_payload.build_stage_plan(2) == [("lure", 0), ("inertia", 1)]
     assert wo_payload.build_stage_plan(8) == [("lure", 0), ("inertia", 7)]
+
+
+def test_single_stage_plans_retain_full_condition_locations() -> None:
+    assert lure_only.build_stage_plan(8) == [("lure", 0)]
+    assert inertia_only.build_stage_plan(8) == [("inertia", 4)]
+    assert payload_only.build_stage_plan(8) == [("payload", 7)]

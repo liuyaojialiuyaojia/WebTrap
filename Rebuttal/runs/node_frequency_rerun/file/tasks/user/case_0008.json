@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0008",
+  "question": "Navigate the directory tree and locate the file named `cache_eviction_strategies.md`. Confirm the correct file using this clue: `# Cache Eviction Strategies`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/project_structure/subdirectory_overview/components_overview/components_interaction_diagram/component_interaction_summary/cache_eviction_policies/cache_eviction_analysis/cache_eviction_metrics/cache_eviction_metrics_analysis/cache_eviction_strategies.md",
+  "user_target_index_path": "/2/1/1/2/2/2/2/1/2/2",
+  "user_target_filename": "cache_eviction_strategies.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

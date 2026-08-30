@@ -3,18 +3,16 @@ from __future__ import annotations
 import json
 import re
 
-from utils.defenses import (
+from experiment_defenses import (
     DEFENSE_MODE_GOAL_REINFORCE_FAKECOM_T,
     DEFENSE_MODE_GOAL_REINFORCE_IGNORE,
     DEFENSE_MODE_SEGMENT_REMOVE_DIRECT,
     DEFENSE_MODE_SEGMENT_REMOVE_GATED,
-)
-from utils.defenses.goal_reinforcement import (
     apply_system_prompt_defense,
     build_goal_reinforcement_messages,
     merge_goal_reinforcement_into_input,
+    sanitize_observation_text,
 )
-from utils.defenses.segmentation_removal import sanitize_observation_text
 
 
 def _mock_ask_model(messages: list[dict[str, str]], max_tokens: int) -> str:

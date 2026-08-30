@@ -26,7 +26,7 @@ if str(WORKSPACE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKSPACE_ROOT))
 
 from experiment_paths import resolve_experiment_root, resolve_path_within
-from utils.defenses import ALLOWED_DEFENSE_MODES
+from experiment_defenses import ALLOWED_DEFENSE_MODES
 
 
 def _discover_tasks(task_dir: Path) -> List[Path]:
@@ -51,7 +51,7 @@ def _build_command(
     log_path: Path,
 ) -> List[str]:
     command = [
-        "python",
+        sys.executable,
         "web/exp/05_evaluate/tool_calling_agent_defended.py",
         "--webarena_config_path",
         str(task_path),

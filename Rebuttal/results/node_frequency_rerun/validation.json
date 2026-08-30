@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "browser_trace_count": 16,
+    "file_trace_count": 16,
+    "browser_all_nonempty": true,
+    "file_all_nonempty": true,
+    "browser_common_nonroot_nodes": [
+      "1"
+    ],
+    "file_common_nonroot_nodes": [
+      "/root/project_structure",
+      "/root/topics",
+      "/root/topics/specific_topic"
+    ],
+    "browser_total_unique_node_trajectory_incidences": 128,
+    "file_total_unique_node_trajectory_incidences": 199
+  },
+  "result_sha256": "fc36aec6841420318256888dc1991278f796f4f16594073dbfd9586be4c93e28",
+  "table_sha256": "3886649e14e082341eba9b3cfb674f335ffc52778c48cee821516b63c20d0134"
+}

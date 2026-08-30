@@ -1,0 +1,81 @@
+model_list:
+  # - model_name: deepseek-v3-1-terminus
+  #   litellm_params:
+  #     model: volcengine/deepseek-v3-1-terminus
+  #     api_key: os.environ/VOLCENGINE_API_KEY
+  #     api_base: https://ark.cn-beijing.volces.com/api/v3
+  # - model_name: kimi-k2-250905
+  #   litellm_params:
+  #     model: volcengine/kimi-k2-250905
+  #     api_key: os.environ/VOLCENGINE_API_KEY
+  #     api_base: https://ark.cn-beijing.volces.com/api/v3
+
+  # target
+  - model_name: deepseek-v3-1-terminus
+    litellm_params:
+      model: openrouter/deepseek/deepseek-v3.1-terminus
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: openrouter/google/gemini-2.5-flash
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: glm-4.5-air
+    litellm_params:
+      model: openrouter/z-ai/glm-4.5-air
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: qwen3-235b-a22b-2507
+    litellm_params:
+      model: openrouter/qwen/qwen3-235b-a22b-2507
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: kimi-k2-0905
+    litellm_params:
+      model: openrouter/moonshotai/kimi-k2-0905
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: gpt-4o
+    litellm_params:
+      model: openrouter/openai/gpt-4o
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: gpt-4.1-mini
+    litellm_params:
+      model: openrouter/openai/gpt-4.1-mini
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+  - model_name: qwen3-coder-next-local
+    litellm_params:
+      model: openai/Qwen3-Coder-Next
+      api_key: os.environ/VLLM_API_KEY
+      api_base: http://host.docker.internal:8888/v1
+
+  # attacker
+  - model_name: hermes-4-405b
+    litellm_params:
+      model: openrouter/nousresearch/hermes-4-405b
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  - model_name: "*"
+    litellm_params:
+      model: openrouter/*
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+litellm_settings:
+  set_verbose: false
+  drop_params: true
+  cache: true
+  cache_params:
+    type: redis
+    host: os.environ/REDIS_HOST
+    port: os.environ/REDIS_PORT
+    namespace: "litellm.cache"
+    ttl: 2592000
+    supported_call_types: ["acompletion", "aembedding", "atranscription"]
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

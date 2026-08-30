@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0004",
+  "question": "Navigate the directory tree and locate the file named `canary_release_best_practices.md`. Confirm the correct file using this clue: `# Best Practices for Canary Releases`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/project_structure/subdirectory_overview/components_overview/definition_of_components/component_dependencies/dependency_management_strategies/dependency_upgrade_guidelines/partial_upgrade_strategies/canary_releases/canary_release_best_practices.md",
+  "user_target_index_path": "/2/1/1/1/2/1/2/1/1/2",
+  "user_target_filename": "canary_release_best_practices.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

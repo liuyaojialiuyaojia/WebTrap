@@ -20,7 +20,14 @@ if str(STAGE2_DIR) not in sys.path:
     sys.path.insert(0, str(STAGE2_DIR))
 
 from experiment_paths import resolve_experiment_root, resolve_path_within
-from psaa.ablation import wo_inertia, wo_lure, wo_payload
+from psaa.ablation import (
+    inertia_only,
+    lure_only,
+    payload_only,
+    wo_inertia,
+    wo_lure,
+    wo_payload,
+)
 from psaa.ablation.prompt_spec import (
     VALID_PSAA_PROMPT_SPEC_VERSIONS,
     load_ablation_prompt_spec,
@@ -46,6 +53,9 @@ from psaa.inject_from_attack_case import (
 )
 
 _ABLATION_VARIANTS = {
+    "lure_only": lure_only,
+    "inertia_only": inertia_only,
+    "payload_only": payload_only,
     "wo_lure": wo_lure,
     "wo_inertia": wo_inertia,
     "wo_payload": wo_payload,
@@ -350,7 +360,7 @@ def main() -> None:
                     "page and the anchor page."
                 )
 
-            if stage != "payload" and stage_idx + 1 < len(stage_plan):
+            if stage_idx + 1 < len(stage_plan):
                 route_target_position = int(stage_plan[stage_idx + 1][1])
                 if route_target_position > chain_position:
                     route_page_sequence = [
@@ -362,7 +372,11 @@ def main() -> None:
                 else:
                     route_page_sequence = remaining_page_sequence
             else:
-                route_page_sequence = [page_index, anchor_page_index]
+                # A lone Lure/Inertia must carry the complete remaining route to
+                # the anchor, rather than pointing at a stage removed by the
+                # ablation. For Payload at the final Full location this naturally
+                # reduces to [payload, anchor].
+                route_page_sequence = remaining_page_sequence
 
             if len(route_page_sequence) < 2:
                 route_page_sequence = remaining_page_sequence

@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0013",
+  "question": "Navigate the directory tree and locate the file named `detailed_action_steps.md`. Confirm the correct file using this clue: `# Detailed Action Steps for Data Breach Response`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/topics/applications_overview/real_world_cases/telemedicine_challenges/telemedicine_regulatory_challenges/telemedicine_practice_guidelines/patient_privacy_guidelines/telemedicine_data_breach_protocols/data_breach_response_plan/detailed_action_steps.md",
+  "user_target_index_path": "/1/2/1/2/2/2/2/1/1/1",
+  "user_target_filename": "detailed_action_steps.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

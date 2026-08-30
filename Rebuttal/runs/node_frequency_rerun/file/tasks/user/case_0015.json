@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0015",
+  "question": "Navigate the directory tree and locate the file named `error_logging_configuration.yaml`. Confirm the correct file using this clue: `logging:`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/topics/specific_topic/subtopic_case_studies/application_a_analysis/implementation_details/error_handling/api_error_handling/error_logging/error_handling_guidelines/error_logging_configuration.yaml",
+  "user_target_index_path": "/1/1/1/1/1/1/1/1/2/1",
+  "user_target_filename": "error_logging_configuration.yaml",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

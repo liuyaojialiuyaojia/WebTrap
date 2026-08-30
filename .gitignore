@@ -32,6 +32,12 @@ web/runs/
 file/runs/
 web/pilot/cases/
 web/pilot/runs/
+Rebuttal/runs/*
+!Rebuttal/runs/node_frequency_rerun/
+!Rebuttal/runs/node_frequency_rerun/**
+Rebuttal/results/deepseek_formal/*
+Rebuttal/results/materialized_envs/*
+!Rebuttal/results/materialized_envs/readiness_summary.json
 web/runs_old/
 file/runs_old/
 **/agent_logs/

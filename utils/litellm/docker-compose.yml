@@ -1,0 +1,36 @@
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "no"]
+    restart: unless-stopped
+
+  proxy-bridge:
+    image: ghcr.io/berriai/litellm:main-latest
+    network_mode: host
+    restart: unless-stopped
+    entrypoint: ["python", "/app/proxy_bridge.py"]
+    command:
+      - "--listen-host"
+      - "172.17.0.1"
+      - "--listen-port"
+      - "17891"
+      - "--target-host"
+      - "127.0.0.1"
+      - "--target-port"
+      - "17891"
+    volumes:
+      - ./python/proxy_bridge.py:/app/proxy_bridge.py:ro
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    env_file: .env
+    restart: unless-stopped
+    ports: ["4000:4000"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    command: ["--config", "/app/config.yaml"]
+    depends_on:
+      - redis
+      - proxy-bridge

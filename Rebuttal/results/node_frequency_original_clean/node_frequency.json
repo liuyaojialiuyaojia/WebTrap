@@ -1,0 +1,84 @@
+{
+  "experiment": "EXP-COVER-001-ORIGINAL-CLEAN",
+  "protocol": {
+    "condition": "clean_no_attack",
+    "source_runs": "original OSR runs",
+    "trajectories": {
+      "Browser": 72,
+      "File": 60
+    },
+    "task_or_case_counts": {
+      "Browser": 24,
+      "File": 20
+    },
+    "trials_or_samples_per_task": 3,
+    "unique_target_nodes": {
+      "Browser": 2,
+      "File": 1
+    },
+    "node_counting": "one visit per node per trajectory",
+    "scope": "user-tree nodes only in numerator and denominator",
+    "root": "excluded as the mandatory trivial node",
+    "target_nodes": "included",
+    "top1_er": "maximum empirical node visit frequency",
+    "random1_er": "exact expected ER for one uniformly sampled candidate node",
+    "threshold_ratios": "candidate nodes meeting threshold / all candidate nodes",
+    "browser_attacker_writable_public": "all non-root Browser user-tree pages",
+    "file_attacker_writable_public": "all non-root File user-tree directories",
+    "neutral_security_nodes": "excluded from numerator and denominator under the existing user-tree-only table definition"
+  },
+  "rows": [
+    {
+      "system": "Browser",
+      "candidate_nodes": "All non-trivial nodes",
+      "trajectories": 72,
+      "candidate_count": 1022,
+      "top1_node": 126,
+      "top1_er": 1.0,
+      "random1_er": 0.008887801696020875,
+      "nodes_er_ge_10_count": 10,
+      "nodes_er_ge_10_ratio": 0.009784735812133072,
+      "nodes_er_ge_30_count": 10,
+      "nodes_er_ge_30_ratio": 0.009784735812133072
+    },
+    {
+      "system": "Browser",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "trajectories": 72,
+      "candidate_count": 1022,
+      "top1_node": 126,
+      "top1_er": 1.0,
+      "random1_er": 0.008887801696020875,
+      "nodes_er_ge_10_count": 10,
+      "nodes_er_ge_10_ratio": 0.009784735812133072,
+      "nodes_er_ge_30_count": 10,
+      "nodes_er_ge_30_ratio": 0.009784735812133072
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "All non-trivial nodes",
+      "trajectories": 60,
+      "candidate_count": 2608,
+      "top1_node": "/root/project_structure",
+      "top1_er": 1.0,
+      "random1_er": 0.003949386503067485,
+      "nodes_er_ge_10_count": 10,
+      "nodes_er_ge_10_ratio": 0.003834355828220859,
+      "nodes_er_ge_30_count": 10,
+      "nodes_er_ge_30_ratio": 0.003834355828220859
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "trajectories": 60,
+      "candidate_count": 870,
+      "top1_node": "/root/project_structure",
+      "top1_er": 1.0,
+      "random1_er": 0.01057471264367816,
+      "nodes_er_ge_10_count": 9,
+      "nodes_er_ge_10_ratio": 0.010344827586206896,
+      "nodes_er_ge_30_count": 9,
+      "nodes_er_ge_30_ratio": 0.010344827586206896
+    }
+  ]
+}

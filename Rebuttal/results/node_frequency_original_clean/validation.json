@@ -1,0 +1,37 @@
+{
+  "condition": "clean_no_attack",
+  "trajectory_counts": {
+    "Browser": 72,
+    "File": 60
+  },
+  "unique_target_counts": {
+    "Browser": 2,
+    "File": 1
+  },
+  "candidate_counts": {
+    "Browser": {
+      "All non-trivial nodes": 1022,
+      "Attacker-writable public nodes": 1022
+    },
+    "File": {
+      "All non-trivial nodes": 2608,
+      "Attacker-writable public nodes": 870
+    }
+  },
+  "excluded_neutral_security_nodes_visited": {
+    "Browser": [
+      1023,
+      1024,
+      1053
+    ],
+    "File": [
+      "/root/project_structure/deployment_guide/deployment_strategies/observability_tools/observability_tools_comparison/observability_tools_best_practices/monitoring_alerts_best_practices/alert_response_techniques/security_entry"
+    ]
+  },
+  "output_sha256": {
+    "node_frequency.json": "2e4b7b5f28b167d783cca0d3b1b8e26fa48748c79a5689d19f9030dbc816bf57",
+    "node_frequency.csv": "26c3be558fd0ebaa9769456e3ee2f40408b220e1ceb49060859adb80bad392af",
+    "node_rates.csv": "69bccd92ef9c72161de377322e5fe168bf18df6f38c3305acdfd3d534733d9b7",
+    "table.md": "9e6156f3486e0b619eb7a62d862ef193e663d8b40b58ea1294079209e65e7228"
+  }
+}

@@ -3,11 +3,15 @@
 
 from __future__ import annotations
 
+from contextlib import contextmanager
+import fcntl
 import json
 import os
+import random
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 
 import click
@@ -20,14 +24,252 @@ if str(REPO_ROOT) not in sys.path:
 if str(VISUALWEBARENA_ROOT) not in sys.path:
     sys.path.insert(0, str(VISUALWEBARENA_ROOT))
 os.environ.setdefault("DATASET", "visualwebarena")
-from utils.defenses import ALLOWED_DEFENSE_MODES, DEFENSE_MODE_DEFAULT
-from utils.defenses.goal_reinforcement import (
+from experiment_defenses import (
+    ALLOWED_DEFENSE_MODES,
+    DEFENSE_MODE_DEFAULT,
     apply_step_wise_defense,
     apply_system_prompt_defense,
     build_goal_reinforcement_messages,
     merge_goal_reinforcement_into_input,
+    sanitize_observation_text,
 )
-from utils.defenses.segmentation_removal import sanitize_observation_text
+
+NO_CACHE_EXTRA_BODY = {
+    "cache": {
+        "no-cache": True,
+        "no-store": True,
+    }
+}
+RETRYABLE_OPENAI_STATUS_CODES = {408, 409, 429, 500, 502, 503, 504}
+DEFAULT_OPENAI_RETRY_DELAYS_SECONDS = (5.0, 15.0, 60.0)
+_INITIAL_OPENAI_JITTER_DONE = False
+
+
+def _optional_positive_int_env(name: str) -> int | None:
+    raw = os.environ.get(name)
+    if not raw:
+        return None
+    value = int(raw)
+    if value < 1:
+        raise ValueError(f"{name} must be a positive integer when set")
+    return value
+
+
+class OpenAIResponsePayloadError(RuntimeError):
+    """Error returned inside a chat completion payload instead of as an exception."""
+
+    def __init__(self, message: str, status_code: int | None = None):
+        super().__init__(message)
+        self.status_code = status_code
+
+
+def _completion_usage_tokens(completion: object) -> tuple[object, object]:
+    """Return prompt/completion token counts, tolerating proxy responses without usage."""
+
+    usage = getattr(completion, "usage", None)
+    return (
+        getattr(usage, "prompt_tokens", "unknown"),
+        getattr(usage, "completion_tokens", "unknown"),
+    )
+
+
+def _payload_value(payload: object, key: str) -> object:
+    if isinstance(payload, dict):
+        return payload.get(key)
+    return getattr(payload, key, None)
+
+
+def _status_code_from_error_payload(payload: object, message: str) -> int | None:
+    for key in ("status", "status_code", "code"):
+        value = _payload_value(payload, key)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str) and value.isdigit():
+            return int(value)
+    for status_code in RETRYABLE_OPENAI_STATUS_CODES:
+        if str(status_code) in message:
+            return status_code
+    return None
+
+
+def _raise_for_completion_error_payload(completion: object) -> None:
+    """Raise when a proxy encodes an API error in a nominal completion object."""
+
+    payload = _payload_value(completion, "error")
+    if payload:
+        message = str(_payload_value(payload, "message") or payload)
+        raise OpenAIResponsePayloadError(
+            message,
+            status_code=_status_code_from_error_payload(payload, message),
+        )
+    if _payload_value(completion, "choices") is None:
+        raise OpenAIResponsePayloadError(
+            "OpenAI response payload did not include choices",
+            status_code=503,
+        )
+
+
+def _build_completion_kwargs(
+    *,
+    model: str,
+    messages: list[dict],
+    temperature: float | None,
+    seed: int | None,
+    tools: list[dict] | None = None,
+    max_tokens: int | None = None,
+) -> dict[str, object]:
+    """Build provider-portable Chat Completions arguments.
+
+    OpenRouter/LiteLLM may ignore unsupported optional parameters such as
+    ``seed`` for a particular provider. The cache directives keep repeated
+    ablation trials independent, while the tool settings force the WebArena
+    agent's one-action-at-a-time contract.
+    """
+
+    kwargs: dict[str, object] = {
+        "model": model,
+        "messages": messages,
+        "extra_body": {
+            "cache": dict(NO_CACHE_EXTRA_BODY["cache"]),
+        },
+    }
+    reasoning_effort = os.environ.get("WEBTRAP_REASONING_EFFORT")
+    if reasoning_effort:
+        kwargs["extra_body"]["reasoning_effort"] = reasoning_effort
+    if tools is not None:
+        kwargs.update(
+            {
+                "tools": tools,
+                "tool_choice": "auto",
+                "parallel_tool_calls": False,
+            }
+        )
+    if temperature is not None:
+        kwargs["temperature"] = float(temperature)
+    if seed is not None:
+        kwargs["seed"] = int(seed)
+    if max_tokens is not None:
+        kwargs["max_tokens"] = int(max_tokens)
+    return kwargs
+
+
+def _openai_retry_delays() -> tuple[float, ...]:
+    raw = os.environ.get("WEBTRAP_OPENAI_RETRY_DELAYS")
+    if not raw:
+        return DEFAULT_OPENAI_RETRY_DELAYS_SECONDS
+    delays: list[float] = []
+    for item in raw.split(","):
+        item = item.strip()
+        if not item:
+            continue
+        delays.append(max(0.0, float(item)))
+    return tuple(delays)
+
+
+def _openai_request_timeout() -> float | None:
+    raw = os.environ.get("WEBTRAP_OPENAI_TIMEOUT")
+    if not raw:
+        return None
+    return max(1.0, float(raw))
+
+
+def _openai_retry_jitter_seconds() -> float:
+    raw = os.environ.get("WEBTRAP_OPENAI_RETRY_JITTER_SECONDS")
+    if not raw:
+        return 0.0
+    return max(0.0, float(raw))
+
+
+def _openai_initial_jitter_seconds() -> float:
+    raw = os.environ.get("WEBTRAP_OPENAI_INITIAL_JITTER_SECONDS")
+    if not raw:
+        return 0.0
+    return max(0.0, float(raw))
+
+
+@contextmanager
+def _openai_api_lock():
+    lock_path = os.environ.get("WEBTRAP_OPENAI_LOCK_FILE")
+    if not lock_path:
+        yield
+        return
+
+    path = Path(lock_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a", encoding="utf-8") as lock_file:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+
+
+def _is_retryable_openai_error(exc: Exception) -> bool:
+    status_code = getattr(exc, "status_code", None)
+    if status_code in RETRYABLE_OPENAI_STATUS_CODES:
+        return True
+
+    body = getattr(exc, "body", None)
+    if isinstance(body, dict):
+        if body.get("retryable") is True:
+            return True
+        body_status = body.get("status")
+        if body_status in RETRYABLE_OPENAI_STATUS_CODES:
+            return True
+
+    response = getattr(exc, "response", None)
+    response_status = getattr(response, "status_code", None)
+    if response_status in RETRYABLE_OPENAI_STATUS_CODES:
+        return True
+
+    text = str(exc).lower()
+    return any(
+        marker in text
+        for marker in (
+            "bad gateway",
+            "cloudflare",
+            "rate limit",
+            "retry shortly",
+            "saturated",
+            "serviceunavailable",
+            "temporarily unavailable",
+            "timeout",
+        )
+    )
+
+
+def _create_chat_completion_with_retries(client, **kwargs):
+    global _INITIAL_OPENAI_JITTER_DONE
+    delays = _openai_retry_delays()
+    for attempt_index in range(len(delays) + 1):
+        initial_jitter = _openai_initial_jitter_seconds()
+        if attempt_index == 0 and initial_jitter and not _INITIAL_OPENAI_JITTER_DONE:
+            _INITIAL_OPENAI_JITTER_DONE = True
+            delay = random.uniform(0.0, initial_jitter)
+            print(
+                f"Staggering initial OpenAI API request by {delay:g}s",
+                flush=True,
+            )
+            time.sleep(delay)
+        try:
+            with _openai_api_lock():
+                completion = client.chat.completions.create(**kwargs)
+            _raise_for_completion_error_payload(completion)
+            return completion
+        except Exception as exc:
+            if attempt_index >= len(delays) or not _is_retryable_openai_error(exc):
+                raise
+            delay = delays[attempt_index]
+            jitter = _openai_retry_jitter_seconds()
+            if jitter:
+                delay += random.uniform(0.0, jitter)
+            print(
+                "Retryable OpenAI API error "
+                f"on attempt {attempt_index + 1}/{len(delays) + 1}: {exc}. "
+                f"Retrying in {delay:g}s",
+                flush=True,
+            )
+            time.sleep(delay)
 
 
 def _load_visualwebarena_runtime():
@@ -83,19 +325,26 @@ class GPTWebAgent:
                 azure_endpoint=os.environ["AZURE_API_ENDPOINT"],
                 api_key=os.environ["AZURE_API_KEY"],
                 api_version=api_version,
+                timeout=_openai_request_timeout(),
             )
         elif "OPENAI_API_KEY" in os.environ:
-            base_url = os.environ.get("OPENAI_BASE_URL") or os.environ.get("OPENAI_API_BASE")
-            kwargs = {"api_key": os.environ["OPENAI_API_KEY"]}
+            client_kwargs = {"api_key": os.environ["OPENAI_API_KEY"]}
+            base_url = os.environ.get("OPENAI_BASE_URL") or os.environ.get(
+                "OPENAI_API_BASE"
+            )
             if base_url:
-                kwargs["base_url"] = base_url
-            client = OpenAI(**kwargs)
+                client_kwargs["base_url"] = base_url
+            request_timeout = _openai_request_timeout()
+            if request_timeout is not None:
+                client_kwargs["timeout"] = request_timeout
+            client = OpenAI(**client_kwargs)
         else:
             raise ValueError("Missing OpenAI API key")
         self.client = client
         self.model = model
         self.temperature = temperature
         self.seed = seed
+        self.max_tokens = _optional_positive_int_env("WEBTRAP_AGENT_MAX_TOKENS")
         self.defense_mode = defense_mode
         self.defense_cache: dict[tuple[object, ...], object] = {}
         self.current_user_objective = ""
@@ -147,18 +396,18 @@ class GPTWebAgent:
 
     def _call_model(self, messages: list[dict]):
         try:
-            kwargs = {
-                "model": self.model,
-                "messages": messages,
-                "tools": self.tools_definitions,
-            }
-            if self.temperature is not None:
-                kwargs["temperature"] = float(self.temperature)
-            if self.seed is not None:
-                kwargs["seed"] = int(self.seed)
-            completion = self.client.chat.completions.create(**kwargs)
+            kwargs = _build_completion_kwargs(
+                model=self.model,
+                messages=messages,
+                tools=self.tools_definitions,
+                temperature=self.temperature,
+                seed=self.seed,
+                max_tokens=self.max_tokens,
+            )
+            completion = _create_chat_completion_with_retries(self.client, **kwargs)
+            prompt_tokens, completion_tokens = _completion_usage_tokens(completion)
             print(
-                f"Received model response. Used {completion.usage.prompt_tokens} prompt tokens and {completion.usage.completion_tokens} completion tokens"
+                f"Received model response. Used {prompt_tokens} prompt tokens and {completion_tokens} completion tokens"
             )
             return _parse_response_to_json(completion.choices[0].message)
         except Exception as exc:
@@ -173,15 +422,14 @@ class GPTWebAgent:
         self, messages: list[dict[str, str]], max_tokens: int
     ) -> str | None:
         try:
-            kwargs: dict[str, object] = {
-                "model": self.model,
-                "messages": messages,
-                "temperature": 0.0,
-                "max_tokens": max_tokens,
-            }
-            if self.seed is not None:
-                kwargs["seed"] = int(self.seed)
-            completion = self.client.chat.completions.create(**kwargs)
+            kwargs = _build_completion_kwargs(
+                model=self.model,
+                messages=messages,
+                temperature=0.0,
+                seed=self.seed,
+                max_tokens=max_tokens,
+            )
+            completion = _create_chat_completion_with_retries(self.client, **kwargs)
             response = completion.choices[0].message.content
             return str(response or "").strip()
         except Exception as exc:

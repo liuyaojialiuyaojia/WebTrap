@@ -390,6 +390,7 @@ def _generate_checked_injection_text(
     previous_injection: str | None,
     security_target_path_text: str,
     recipient_email: str,
+    force_checker: bool = False,
     attempt_callback: Callable[[dict[str, Any]], None] | None = None,
 ) -> tuple[str, dict[str, Any]]:
     if stage not in {"lure", "inertia", "payload"}:
@@ -397,7 +398,12 @@ def _generate_checked_injection_text(
 
     attacker_stage_tpl = getattr(spec.attacker_templates, stage)
     check_template = getattr(spec.check_templates, stage)
-    use_checker = spec.retry_num > 1
+    use_checker = spec.retry_num > 1 or force_checker
+    checker_mode = (
+        "acceptance_only"
+        if force_checker and spec.retry_num == 1
+        else ("rewrite_on_rejection" if use_checker else "disabled")
+    )
     if use_checker:
         _validate_check_template_uses_candidate(stage=stage, template=check_template)
 
@@ -510,6 +516,7 @@ def _generate_checked_injection_text(
                     "parse_error": parse_error,
                     "passed": bool(passed),
                     "checker_used": bool(use_checker),
+                    "checker_mode": checker_mode,
                     "check_comment": last_comment,
                     "attacker_prompt": attacker_prompt,
                     "check_prompt": check_prompt,
@@ -526,6 +533,7 @@ def _generate_checked_injection_text(
         "last_comment": last_comment,
         "candidate_body": last_candidate_body,
         "checker_used": bool(use_checker),
+        "checker_mode": checker_mode,
     }
 
 

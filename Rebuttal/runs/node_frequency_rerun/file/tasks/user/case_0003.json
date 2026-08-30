@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0003",
+  "question": "Navigate the directory tree and locate the file named `forecasting_methods.md`. Confirm the correct file using this clue: `# Forecasting Methods in Trend Analysis`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/topics/specific_topic/implementation_challenges/resource_management/resource_monitoring/resource_efficiency/resource_monitoring/resource_analysis/trend_analysis/forecasting_methods.md",
+  "user_target_index_path": "/1/1/2/1/2/2/1/2/1/1",
+  "user_target_filename": "forecasting_methods.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

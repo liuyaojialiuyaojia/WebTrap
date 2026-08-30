@@ -1,0 +1,70 @@
+{
+  "analysis": "column-wise theoretical target-allocation upper bounds",
+  "empirical_result": false,
+  "assumptions": {
+    "trajectory_model": "each trajectory follows the unique user-tree path to its assigned target and visits each path node once",
+    "browser_trajectories": 72,
+    "file_trajectories": 60,
+    "random1_expected_encounters": "expected total encounter count across the full batch after uniformly sampling one candidate node",
+    "ranked_er_columns": "Top-k is the kth-highest individual candidate-node ER, not a top-k union; ranks are maximized independently",
+    "threshold_columns": "maximized independently; they need not be attainable by one common target allocation"
+  },
+  "rows": [
+    {
+      "system": "Browser",
+      "candidate_nodes": "All non-trivial nodes",
+      "trajectories": 72,
+      "candidate_count": 1022,
+      "top1_er_upper_bound": 1.0,
+      "top2_er_upper_bound": 1.0,
+      "top3_er_upper_bound": 1.0,
+      "random1_expected_encounters": 0.6340508806262231,
+      "nodes_er_ge_10_count_upper_bound": 68,
+      "nodes_er_ge_10_ratio_upper_bound": 0.06653620352250489,
+      "nodes_er_ge_30_count_upper_bound": 26,
+      "nodes_er_ge_30_ratio_upper_bound": 0.025440313111545987
+    },
+    {
+      "system": "Browser",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "trajectories": 72,
+      "candidate_count": 1022,
+      "top1_er_upper_bound": 1.0,
+      "top2_er_upper_bound": 1.0,
+      "top3_er_upper_bound": 1.0,
+      "random1_expected_encounters": 0.6340508806262231,
+      "nodes_er_ge_10_count_upper_bound": 68,
+      "nodes_er_ge_10_ratio_upper_bound": 0.06653620352250489,
+      "nodes_er_ge_30_count_upper_bound": 26,
+      "nodes_er_ge_30_ratio_upper_bound": 0.025440313111545987
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "All non-trivial nodes",
+      "trajectories": 60,
+      "candidate_count": 2608,
+      "top1_er_upper_bound": 1.0,
+      "top2_er_upper_bound": 1.0,
+      "top3_er_upper_bound": 1.0,
+      "random1_expected_encounters": 0.23006134969325154,
+      "nodes_er_ge_10_count_upper_bound": 83,
+      "nodes_er_ge_10_ratio_upper_bound": 0.031825153374233126,
+      "nodes_er_ge_30_count_upper_bound": 29,
+      "nodes_er_ge_30_ratio_upper_bound": 0.01111963190184049
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "trajectories": 60,
+      "candidate_count": 870,
+      "top1_er_upper_bound": 1.0,
+      "top2_er_upper_bound": 1.0,
+      "top3_er_upper_bound": 1.0,
+      "random1_expected_encounters": 0.6206896551724138,
+      "nodes_er_ge_10_count_upper_bound": 73,
+      "nodes_er_ge_10_ratio_upper_bound": 0.0839080459770115,
+      "nodes_er_ge_30_count_upper_bound": 26,
+      "nodes_er_ge_30_ratio_upper_bound": 0.029885057471264367
+    }
+  ]
+}

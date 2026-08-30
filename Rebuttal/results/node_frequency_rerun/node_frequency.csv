@@ -1,0 +1,5 @@
+system,candidate_nodes,trajectories,candidate_count,top1_node,top1_er,random1_er,nodes_er_ge_10_count,nodes_er_ge_10_ratio,nodes_er_ge_30_count,nodes_er_ge_30_ratio
+Browser,All non-trivial nodes,16,1022,1,1.0,0.007827788649706457,16,0.015655577299412915,9,0.008806262230919765
+Browser,Attacker-writable public nodes,16,1022,1,1.0,0.007827788649706457,16,0.015655577299412915,9,0.008806262230919765
+File,All non-trivial nodes,16,2608,/root/project_structure,1.0,0.0047689800613496935,22,0.00843558282208589,15,0.005751533742331288
+File,Attacker-writable public nodes,16,870,/root/project_structure,1.0,0.010775862068965518,17,0.01954022988505747,11,0.01264367816091954

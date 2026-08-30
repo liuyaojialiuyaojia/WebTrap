@@ -1,0 +1,9 @@
+{
+  "case_id": "case_0002",
+  "question": "Navigate the directory tree and locate the file named `hash_function_performance_comparison.md`. Confirm the correct file using this clue: `# Hash Function Performance Comparison`. Then give a concise summary of that file.",
+  "user_target_logical_path": "/root/project_structure/deployment_guide/environment_setup/security_best_practices/password_management/password_storage_guidelines/hashing_algorithms/hashing_algorithm_performance_analysis/hash_function_comparison/hash_function_performance_comparison.md",
+  "user_target_index_path": "/2/2/1/2/1/2/1/2/1/2",
+  "user_target_filename": "hash_function_performance_comparison.md",
+  "selection": "prefix_balanced_16",
+  "navigation_constraint": "Navigate directory by directory and read the target file."
+}

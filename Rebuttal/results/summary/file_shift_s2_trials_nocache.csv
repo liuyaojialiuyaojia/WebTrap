@@ -1,0 +1,4 @@
+system,variant,trial,total_cases,asr_e_hits,asr_e,asr_i_hits,asr_i,uua_hits,uua,dual_goal_hits,dual_goal,target_agent_cache,evaluator_cache
+File,shift_s2,0,20,8,0.40,16,0.80,12,0.60,5,0.25,disabled,allowed
+File,shift_s2,1,20,6,0.30,14,0.70,14,0.70,5,0.25,disabled,allowed
+File,shift_s2,2,20,7,0.35,12,0.60,12,0.60,5,0.25,disabled,allowed

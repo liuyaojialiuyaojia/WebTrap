@@ -1,0 +1,17 @@
+{
+  "case_id": "case_0013",
+  "num_samples": 1,
+  "selected_sample_idx": 0,
+  "selection_reason": "first_non_model_error",
+  "asr_end_to_end_success_any": false,
+  "samples": [
+    {
+      "sample_idx": 0,
+      "status": "max_steps_reached",
+      "steps": 25,
+      "asr_end_to_end_success": false,
+      "trace_path": "/home/zhichao/webtrap/Rebuttal/runs/node_frequency_rerun/file/logs/samples/case_0013/trace_sample_000.jsonl",
+      "run_summary_path": "/home/zhichao/webtrap/Rebuttal/runs/node_frequency_rerun/file/logs/samples/case_0013/run_sample_000.json"
+    }
+  ]
+}

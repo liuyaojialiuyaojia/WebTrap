@@ -1,0 +1,412 @@
+{
+  "frontiers": [
+    {
+      "system": "Browser",
+      "candidate_nodes": "All non-trivial nodes",
+      "count_pairs": [
+        {
+          "nodes_er_ge_10_count": 68,
+          "nodes_er_ge_30_count": 3
+        },
+        {
+          "nodes_er_ge_10_count": 67,
+          "nodes_er_ge_30_count": 4
+        },
+        {
+          "nodes_er_ge_10_count": 65,
+          "nodes_er_ge_30_count": 5
+        },
+        {
+          "nodes_er_ge_10_count": 63,
+          "nodes_er_ge_30_count": 6
+        },
+        {
+          "nodes_er_ge_10_count": 61,
+          "nodes_er_ge_30_count": 7
+        },
+        {
+          "nodes_er_ge_10_count": 59,
+          "nodes_er_ge_30_count": 8
+        },
+        {
+          "nodes_er_ge_10_count": 57,
+          "nodes_er_ge_30_count": 9
+        },
+        {
+          "nodes_er_ge_10_count": 55,
+          "nodes_er_ge_30_count": 10
+        },
+        {
+          "nodes_er_ge_10_count": 54,
+          "nodes_er_ge_30_count": 11
+        },
+        {
+          "nodes_er_ge_10_count": 52,
+          "nodes_er_ge_30_count": 12
+        },
+        {
+          "nodes_er_ge_10_count": 50,
+          "nodes_er_ge_30_count": 13
+        },
+        {
+          "nodes_er_ge_10_count": 48,
+          "nodes_er_ge_30_count": 14
+        },
+        {
+          "nodes_er_ge_10_count": 46,
+          "nodes_er_ge_30_count": 15
+        },
+        {
+          "nodes_er_ge_10_count": 44,
+          "nodes_er_ge_30_count": 16
+        },
+        {
+          "nodes_er_ge_10_count": 42,
+          "nodes_er_ge_30_count": 17
+        },
+        {
+          "nodes_er_ge_10_count": 41,
+          "nodes_er_ge_30_count": 18
+        },
+        {
+          "nodes_er_ge_10_count": 39,
+          "nodes_er_ge_30_count": 19
+        },
+        {
+          "nodes_er_ge_10_count": 37,
+          "nodes_er_ge_30_count": 20
+        },
+        {
+          "nodes_er_ge_10_count": 35,
+          "nodes_er_ge_30_count": 21
+        },
+        {
+          "nodes_er_ge_10_count": 33,
+          "nodes_er_ge_30_count": 22
+        },
+        {
+          "nodes_er_ge_10_count": 31,
+          "nodes_er_ge_30_count": 23
+        },
+        {
+          "nodes_er_ge_10_count": 29,
+          "nodes_er_ge_30_count": 24
+        },
+        {
+          "nodes_er_ge_10_count": 27,
+          "nodes_er_ge_30_count": 25
+        },
+        {
+          "nodes_er_ge_10_count": 26,
+          "nodes_er_ge_30_count": 26
+        }
+      ],
+      "independent_maxima_jointly_attainable": false
+    },
+    {
+      "system": "Browser",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "count_pairs": [
+        {
+          "nodes_er_ge_10_count": 68,
+          "nodes_er_ge_30_count": 3
+        },
+        {
+          "nodes_er_ge_10_count": 67,
+          "nodes_er_ge_30_count": 4
+        },
+        {
+          "nodes_er_ge_10_count": 65,
+          "nodes_er_ge_30_count": 5
+        },
+        {
+          "nodes_er_ge_10_count": 63,
+          "nodes_er_ge_30_count": 6
+        },
+        {
+          "nodes_er_ge_10_count": 61,
+          "nodes_er_ge_30_count": 7
+        },
+        {
+          "nodes_er_ge_10_count": 59,
+          "nodes_er_ge_30_count": 8
+        },
+        {
+          "nodes_er_ge_10_count": 57,
+          "nodes_er_ge_30_count": 9
+        },
+        {
+          "nodes_er_ge_10_count": 55,
+          "nodes_er_ge_30_count": 10
+        },
+        {
+          "nodes_er_ge_10_count": 54,
+          "nodes_er_ge_30_count": 11
+        },
+        {
+          "nodes_er_ge_10_count": 52,
+          "nodes_er_ge_30_count": 12
+        },
+        {
+          "nodes_er_ge_10_count": 50,
+          "nodes_er_ge_30_count": 13
+        },
+        {
+          "nodes_er_ge_10_count": 48,
+          "nodes_er_ge_30_count": 14
+        },
+        {
+          "nodes_er_ge_10_count": 46,
+          "nodes_er_ge_30_count": 15
+        },
+        {
+          "nodes_er_ge_10_count": 44,
+          "nodes_er_ge_30_count": 16
+        },
+        {
+          "nodes_er_ge_10_count": 42,
+          "nodes_er_ge_30_count": 17
+        },
+        {
+          "nodes_er_ge_10_count": 41,
+          "nodes_er_ge_30_count": 18
+        },
+        {
+          "nodes_er_ge_10_count": 39,
+          "nodes_er_ge_30_count": 19
+        },
+        {
+          "nodes_er_ge_10_count": 37,
+          "nodes_er_ge_30_count": 20
+        },
+        {
+          "nodes_er_ge_10_count": 35,
+          "nodes_er_ge_30_count": 21
+        },
+        {
+          "nodes_er_ge_10_count": 33,
+          "nodes_er_ge_30_count": 22
+        },
+        {
+          "nodes_er_ge_10_count": 31,
+          "nodes_er_ge_30_count": 23
+        },
+        {
+          "nodes_er_ge_10_count": 29,
+          "nodes_er_ge_30_count": 24
+        },
+        {
+          "nodes_er_ge_10_count": 27,
+          "nodes_er_ge_30_count": 25
+        },
+        {
+          "nodes_er_ge_10_count": 26,
+          "nodes_er_ge_30_count": 26
+        }
+      ],
+      "independent_maxima_jointly_attainable": false
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "All non-trivial nodes",
+      "count_pairs": [
+        {
+          "nodes_er_ge_10_count": 83,
+          "nodes_er_ge_30_count": 5
+        },
+        {
+          "nodes_er_ge_10_count": 81,
+          "nodes_er_ge_30_count": 6
+        },
+        {
+          "nodes_er_ge_10_count": 79,
+          "nodes_er_ge_30_count": 7
+        },
+        {
+          "nodes_er_ge_10_count": 77,
+          "nodes_er_ge_30_count": 8
+        },
+        {
+          "nodes_er_ge_10_count": 75,
+          "nodes_er_ge_30_count": 9
+        },
+        {
+          "nodes_er_ge_10_count": 73,
+          "nodes_er_ge_30_count": 10
+        },
+        {
+          "nodes_er_ge_10_count": 71,
+          "nodes_er_ge_30_count": 11
+        },
+        {
+          "nodes_er_ge_10_count": 69,
+          "nodes_er_ge_30_count": 12
+        },
+        {
+          "nodes_er_ge_10_count": 68,
+          "nodes_er_ge_30_count": 13
+        },
+        {
+          "nodes_er_ge_10_count": 66,
+          "nodes_er_ge_30_count": 14
+        },
+        {
+          "nodes_er_ge_10_count": 64,
+          "nodes_er_ge_30_count": 15
+        },
+        {
+          "nodes_er_ge_10_count": 62,
+          "nodes_er_ge_30_count": 16
+        },
+        {
+          "nodes_er_ge_10_count": 60,
+          "nodes_er_ge_30_count": 17
+        },
+        {
+          "nodes_er_ge_10_count": 58,
+          "nodes_er_ge_30_count": 18
+        },
+        {
+          "nodes_er_ge_10_count": 56,
+          "nodes_er_ge_30_count": 19
+        },
+        {
+          "nodes_er_ge_10_count": 54,
+          "nodes_er_ge_30_count": 20
+        },
+        {
+          "nodes_er_ge_10_count": 53,
+          "nodes_er_ge_30_count": 21
+        },
+        {
+          "nodes_er_ge_10_count": 51,
+          "nodes_er_ge_30_count": 22
+        },
+        {
+          "nodes_er_ge_10_count": 49,
+          "nodes_er_ge_30_count": 23
+        },
+        {
+          "nodes_er_ge_10_count": 47,
+          "nodes_er_ge_30_count": 24
+        },
+        {
+          "nodes_er_ge_10_count": 45,
+          "nodes_er_ge_30_count": 25
+        },
+        {
+          "nodes_er_ge_10_count": 43,
+          "nodes_er_ge_30_count": 26
+        },
+        {
+          "nodes_er_ge_10_count": 41,
+          "nodes_er_ge_30_count": 27
+        },
+        {
+          "nodes_er_ge_10_count": 39,
+          "nodes_er_ge_30_count": 28
+        },
+        {
+          "nodes_er_ge_10_count": 38,
+          "nodes_er_ge_30_count": 29
+        }
+      ],
+      "independent_maxima_jointly_attainable": false
+    },
+    {
+      "system": "File",
+      "candidate_nodes": "Attacker-writable public nodes",
+      "count_pairs": [
+        {
+          "nodes_er_ge_10_count": 73,
+          "nodes_er_ge_30_count": 5
+        },
+        {
+          "nodes_er_ge_10_count": 71,
+          "nodes_er_ge_30_count": 6
+        },
+        {
+          "nodes_er_ge_10_count": 69,
+          "nodes_er_ge_30_count": 7
+        },
+        {
+          "nodes_er_ge_10_count": 67,
+          "nodes_er_ge_30_count": 8
+        },
+        {
+          "nodes_er_ge_10_count": 65,
+          "nodes_er_ge_30_count": 9
+        },
+        {
+          "nodes_er_ge_10_count": 63,
+          "nodes_er_ge_30_count": 10
+        },
+        {
+          "nodes_er_ge_10_count": 61,
+          "nodes_er_ge_30_count": 11
+        },
+        {
+          "nodes_er_ge_10_count": 60,
+          "nodes_er_ge_30_count": 12
+        },
+        {
+          "nodes_er_ge_10_count": 58,
+          "nodes_er_ge_30_count": 13
+        },
+        {
+          "nodes_er_ge_10_count": 56,
+          "nodes_er_ge_30_count": 14
+        },
+        {
+          "nodes_er_ge_10_count": 54,
+          "nodes_er_ge_30_count": 15
+        },
+        {
+          "nodes_er_ge_10_count": 52,
+          "nodes_er_ge_30_count": 16
+        },
+        {
+          "nodes_er_ge_10_count": 50,
+          "nodes_er_ge_30_count": 17
+        },
+        {
+          "nodes_er_ge_10_count": 48,
+          "nodes_er_ge_30_count": 18
+        },
+        {
+          "nodes_er_ge_10_count": 47,
+          "nodes_er_ge_30_count": 19
+        },
+        {
+          "nodes_er_ge_10_count": 45,
+          "nodes_er_ge_30_count": 20
+        },
+        {
+          "nodes_er_ge_10_count": 43,
+          "nodes_er_ge_30_count": 21
+        },
+        {
+          "nodes_er_ge_10_count": 41,
+          "nodes_er_ge_30_count": 22
+        },
+        {
+          "nodes_er_ge_10_count": 39,
+          "nodes_er_ge_30_count": 23
+        },
+        {
+          "nodes_er_ge_10_count": 37,
+          "nodes_er_ge_30_count": 24
+        },
+        {
+          "nodes_er_ge_10_count": 35,
+          "nodes_er_ge_30_count": 25
+        },
+        {
+          "nodes_er_ge_10_count": 34,
+          "nodes_er_ge_30_count": 26
+        }
+      ],
+      "independent_maxima_jointly_attainable": false
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+experiment,system,variant,one_time_selection,selection_rule,payload_er_count,payload_er,asr_e_count,asr_e,asr_i_count,asr_i,uua_count,uua,dual_goal_count,dual_goal
+EXP-PLACE-001,Browser,shift_s2,r02,asr_end_to_end_max,40/42,0.9523809523809523,21/42,0.5,41/42,0.9761904761904762,29/42,0.6904761904761905,15/42,0.35714285714285715
+EXP-PLACE-001,File,shift_s2,sample_0,asr_end_to_end_rate,19/20,0.95,11/20,0.55,20/20,1.0,13/20,0.65,8/20,0.4
